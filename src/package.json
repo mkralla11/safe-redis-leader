@@ -4,7 +4,7 @@
   "description": "Redis leader election implementation that does not have any race conditions",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test NODE_PATH='./' mocha $DEBUG_NODE $WATCH --watch --inspect-brk=0.0.0:9229 --opts ./mochaConfig/mocha.opts ./src/**/*.test.js"
+    "test": "NODE_ENV=test NODE_PATH='./' mocha $DEBUG_NODE $WATCH --watch --inspect-brk=0.0.0:9229 --opts ./mochaConfig/mocha.opts ./src/atomicGetIsEqualDelete/**/*.test.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +14,7 @@
     "lodash": "^4.17.14",
     "mocha": "^6.2.2",
     "nock": "^12.0.2",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "ioredis": "^4.16.0"
   }
 }
