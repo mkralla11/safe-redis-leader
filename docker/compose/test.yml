@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  safe_redis_leader_backend:
+    build:
+      context: ../../
+      dockerfile: ./docker/dockerfiles/Dockerfile
+    # container_name: safe_redis_leader_dev_backend
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      DOCKER_REDIS_HOST: redis_dev
+      DOCKER_REDIS_PASSWORD: redis_dev_password
+      DOCKER_REDIS_PORT: ${DOCKER_REDIS_PORT:-6379}
+      NETWORK_NAME: safe_redis_leader_dev
+    tty: true
+    stdin_open: true
+    working_dir: /app
+    volumes:
+      - ${PWD}/docker:/docker:delegated
+      - ${PWD}/src:/app:delegated
+      - ${PWD}/package.json:/package.json
+      - ${PWD}/package-lock.json:/package-lock.json
+      - ${PWD}/.env:/.env
+      - ${PWD}/dev-docker-data-cache/test_node_modules:/node_modules:delegated
+      - ${PWD}/dev-docker-data-cache/package_node_modules:/app/node_modules:delegated
+      - /var/run/docker.sock:/var/run/docker.sock
+    user: root
+    command: >
+      sh -c 'npm install --ignore-scripts --save --loglevel verbose &&  ${COMPOSE_COMMAND}'
+    ports:
+      - 9220:9229
+    networks:
+      - safe_redis_leader_dev
+networks:
+  safe_redis_leader_dev:
+    name: safe_redis_leader_dev
+    driver: bridge
+# docker network ls -f driver=bridge --format "{{.ID}}" | xargs docker network inspect | grep Name

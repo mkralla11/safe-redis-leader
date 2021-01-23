@@ -1,0 +1,19 @@
+{
+  "name": "safe-redis-leader",
+  "version": "0.0.1",
+  "description": "Redis leader election implementation that does not have any race conditions",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test NODE_PATH='./' mocha $DEBUG_NODE $WATCH --watch --inspect-brk=0.0.0:9229 --opts ./mochaConfig/mocha.opts ./src/**/*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "lodash": "^4.17.14",
+    "mocha": "^6.2.2",
+    "nock": "^12.0.2",
+    "nodemon": "^2.0.4"
+  }
+}

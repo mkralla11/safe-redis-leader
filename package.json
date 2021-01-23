@@ -1,0 +1,11 @@
+{
+  "name": "safe-redis-leader",
+  "version": "0.0.1",
+  "description": "Redis leader election implementation that does not have any race conditions",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm install && node ./docker/scripts/runner.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

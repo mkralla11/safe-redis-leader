@@ -1,0 +1,4 @@
+--reporter spec 
+--file ./mochaConfig/setup/index.js
+--exclude node_modules/**/*
+--timeout 10000

@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  redis_dev:
+    # container_name: hero-dev-redis
+    image: redis:alpine
+    restart: always
+    volumes:
+      - ${PWD}/dev-docker-data-cache/redis-data:/data
+    command: ['redis-server', '--appendonly', 'yes', '--requirepass', 'redis_dev_password']
+    ports:
+      - ${DOCKER_REDIS_PORT_PUBLIC:-6760}:${DOCKER_REDIS_PORT:-6379}
+    networks:
+      - safe_redis_leader_dev
