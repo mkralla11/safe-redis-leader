@@ -1,7 +1,6 @@
 'use strict';
 
 var crypto = require('crypto');
-var uuid = require('uuid');
 var EventEmitter = require('events').EventEmitter;
 const {atomicGetIsEqualDelete} = require('./atomicGetIsEqualDelete')
 
@@ -70,7 +69,7 @@ async function createSafeRedisLeader({
 
   async function stop(){
     // real atomic get -> isEqual -> delete
-    await atomicGetIsEqualDelete({key, id})
+    await atomicGetIsEqualDelete({asyncRedis, key, id})
   }
 
   function on(name, fn){
@@ -89,6 +88,12 @@ async function createSafeRedisLeader({
     emitter.removeAllListeners()
   }
 
+  async function shutdown(){
+    await stop()
+    renewTimeoutId && clearTimeout(renewTimeoutId) 
+    electTimeoutId && clearTimeout(electTimeoutId) 
+  }
+
   return {
     elect,
     isLeader,
@@ -96,7 +101,8 @@ async function createSafeRedisLeader({
     on,
     off,
     once,
-    removeAllListeners
+    removeAllListeners,
+    shutdown
   }
 }
 
