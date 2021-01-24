@@ -6,6 +6,20 @@
   "scripts": {
     "test": "npm install && node ./docker/scripts/runner.js"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Michael Khirallah",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkralla11/safe-redis-leader.git"
+  },
+  "keywords": [
+    "redis",
+    "leader",
+    "elections",
+    "distributed"
+  ],
+  "bugs": {
+    "url": "https://github.com/mkralla11/safe-redis-leader/issues"
+  },
+  "homepage": "https://github.com/mkralla11/safe-redis-leader#readme"
 }
