@@ -62,7 +62,7 @@ async function createSafeRedisLeader({
 
 
   async function isLeader(){
-    const curId = await asyncRedis.get(this.key)
+    const curId = await asyncRedis.get(key)
 
     return id === curId
   }
@@ -102,7 +102,8 @@ async function createSafeRedisLeader({
     off,
     once,
     removeAllListeners,
-    shutdown
+    shutdown,
+    start
   }
 }
 
