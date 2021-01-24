@@ -102,8 +102,7 @@ async function createSafeRedisLeader({
     off,
     once,
     removeAllListeners,
-    shutdown,
-    start
+    shutdown
   }
 }
 
