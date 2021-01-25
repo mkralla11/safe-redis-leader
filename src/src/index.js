@@ -89,9 +89,9 @@ async function createSafeRedisLeader({
   }
 
   async function shutdown(){
-    await stop()
     renewTimeoutId && clearTimeout(renewTimeoutId) 
-    electTimeoutId && clearTimeout(electTimeoutId) 
+    electTimeoutId && clearTimeout(electTimeoutId)
+    await stop()
   }
 
   return {
