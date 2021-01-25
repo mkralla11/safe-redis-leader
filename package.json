@@ -1,6 +1,6 @@
 {
   "name": "safe-redis-leader",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Redis leader election implementation that does not have any race conditions",
   "main": "src/src/index.js",
   "scripts": {
