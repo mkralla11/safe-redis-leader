@@ -26,37 +26,41 @@ async function createSafeRedisLeader({
   let renewTimeoutId,
       electTimeoutId
 
+  let isStarted = false
+
 
 
   async function renew(){
-    const leading = await isLeader()
-    if(leading){
-      await asyncRedis.pexpire(key, ttl)
-      setTimeout(renew, ttl / 2)
-    }
-    else{
-      clearTimeout(renewTimeoutId)
-      electTimeoutId = setTimeout(elect, wait);
-    }
+    await emitOnError(async ()=>{
+      const leading = await isLeader()
+      if(leading){
+        await asyncRedis.pexpire(key, ttl)
+        setTimeout(renew, ttl / 2)
+      }
+      else{
+        clearTimeout(renewTimeoutId)
+        electTimeoutId = setTimeout(elect, wait);
+      }
+    })
   }
 
+  async function runElection(){
+    await emitOnError(async ()=>{
+      const res = await asyncRedis.set(key, id, 'PX', ttl, 'NX')
+
+      if(res !== null) {
+        emitter.emit('elected')
+        renewTimeoutId = setTimeout(renew, ttl / 2)
+      } 
+      else{
+        electTimeoutId = setTimeout(elect, wait)
+      }
+    })
+  }
 
   async function elect(){
-    let res
-    try{
-      res = await asyncRedis.set(key, id, 'PX', ttl, 'NX')
-    }
-    catch(e){
-      return emitter.emit('error', e)
-    }
-
-    if(res !== null) {
-      emitter.emit('elected')
-      renewTimeoutId = setTimeout(renew, ttl / 2)
-    } 
-    else{
-      electTimeoutId = setTimeout(elect, wait)
-    }
+    isStarted = true
+    await runElection()
   }
 
 
@@ -88,7 +92,19 @@ async function createSafeRedisLeader({
     emitter.removeAllListeners()
   }
 
+  async function emitOnError(fn){
+    try{
+      await fn()
+    }
+    catch(e){
+      if(isStarted){
+        emitter.emit('error', e)
+      }
+    }
+  }
+
   async function shutdown(){
+    isStarted = false
     renewTimeoutId && clearTimeout(renewTimeoutId) 
     electTimeoutId && clearTimeout(electTimeoutId)
     await stop()

@@ -1,6 +1,6 @@
 const {createSafeRedisLeader} = require('../index')
 const connectToRedis = require('../../library/connect-to-redis')
-const {tryCatchIgnore} = require('../testHelpers')
+const {tryCatchIgnore, delay} = require('../testHelpers')
 
 describe("createSafeRedisLeader", function(){
   afterEach(async function(){
@@ -18,7 +18,7 @@ describe("createSafeRedisLeader", function(){
       wait: 3000,
       key
     })
-
+    await delay(1000)
 
   })
 })
