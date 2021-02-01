@@ -4,7 +4,8 @@
   "description": "Redis leader election implementation that does not have any race conditions",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test NODE_PATH='./' mocha $DEBUG_NODE $WATCH --watch --inspect-brk=0.0.0:9229 --opts ./mochaConfig/mocha.opts ./src/**/*.test.js"
+    "test": "NODE_ENV=test NODE_PATH='./' mocha $DEBUG_NODE $WATCH --watch --inspect-brk=0.0.0:9229 --opts ./mochaConfig/mocha.opts './src/**/*.test.js'",
+    "example:multi-client": "node ./examples/multi-client/index.js"
   },
   "author": "",
   "license": "ISC",

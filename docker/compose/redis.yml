@@ -11,3 +11,7 @@ services:
       - ${DOCKER_REDIS_PORT_PUBLIC:-6760}:${DOCKER_REDIS_PORT:-6379}
     networks:
       - safe_redis_leader_dev
+networks:
+  safe_redis_leader_dev:
+    name: safe_redis_leader_dev
+    driver: bridge

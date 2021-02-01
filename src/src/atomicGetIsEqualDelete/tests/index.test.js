@@ -54,7 +54,6 @@ describe("atomicGetIsEqualDelete", function(){
       key,
       id
     })
-    console.log(didDelete)
     assert.isTrue(!!didDelete, "lua script claimed to skip delete when it was supposed to be the same id")
 
   })

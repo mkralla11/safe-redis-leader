@@ -4,7 +4,8 @@
   "description": "Redis leader election implementation that does not have any race conditions",
   "main": "src/src/index.js",
   "scripts": {
-    "test": "npm install && node ./docker/scripts/runner.js"
+    "test": "npm install && NODE_ENV=test node ./docker/scripts/runner.js",
+    "example:multi-client": "npm install && EXAMPLE='multi-client' node ./docker/scripts/runner.js"
   },
   "author": "Michael Khirallah",
   "license": "MIT",

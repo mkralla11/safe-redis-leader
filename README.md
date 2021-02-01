@@ -53,7 +53,6 @@ in one terminal, run the follow index.js:
         console.log("I'm the leader - 1")
       })
 
-
       await safeLeader.elect()
     }
 
@@ -91,7 +90,6 @@ In a seperate terminal/tab, run the following index.js:
       safeLeader.on("elected", ()=>{
         console.log("I'm the leader - 2")
       })
-
 
       await safeLeader.elect()
     }
