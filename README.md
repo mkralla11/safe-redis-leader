@@ -34,7 +34,7 @@ in one terminal, run the follow index.js:
     async function main(){
 
       const asyncRedis = new Redis({
-        host: "locahost",
+        host: "localhost",
         port: 6379,
         password: "some-password"
       })
@@ -72,7 +72,7 @@ In a seperate terminal/tab, run the following index.js:
     async function main(){
 
       const asyncRedis = new Redis({
-        host: "locahost",
+        host: "localhost",
         port: 6379,
         password: "some-password"
       })
